@@ -1,2 +1,3 @@
 # ATProject
-CFG to PDA Coverter
+JaNae Strickland, Nicolas Hernandez, and Andres Greene
+CFG to PDA Converter
