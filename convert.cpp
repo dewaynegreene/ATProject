@@ -3,11 +3,9 @@
 
 using namespace std;
 
-string convert (string);
-
 string convert (string grammar)
 {
-    //use islower() and isupper() functions
+  /*  //use islower() and isupper() functions
     //get grammar line by line
     string line = "", push_grammar = "";
 
@@ -31,5 +29,5 @@ string convert (string grammar)
         //deal with line
     }
 
-    return push_grammar;
+    return push_grammar;*/
 }
