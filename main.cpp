@@ -7,7 +7,7 @@ string convert(string);
 
 int main()
 {
-    string input = "", hold = "";
+    string input = "", hold = "", convert_input = "";
 
     cout << "Enter your Context-Free Grammar in GNF (enter 'x' to stop): ";
     cout << endl << endl;
@@ -21,7 +21,7 @@ int main()
 
     cout << "\nGrammar:\n" << input;
 
-    convert(input);
+    convert_input = convert(input);
 
     return EXIT_SUCCESS;
 }
