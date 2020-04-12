@@ -47,6 +47,7 @@ int main()
                     if((p == '|') || (p == '\n'))
                     {
                         //push back handle
+                        
                         handle = "";
                         continue;
                     }
