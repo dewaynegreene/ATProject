@@ -30,7 +30,7 @@ int main()
                 // cout << "terminal: " << terminal << endl;
                 
                 //load production variable
-                auto iter = hold.begin() + 5;
+                auto iter = hold.begin() + 3;
                 while(iter != hold.end()) // handle case: | adD | adf 
                 {
                     prod += *iter;
