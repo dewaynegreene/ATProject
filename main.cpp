@@ -66,7 +66,7 @@ int main()
     
     convert();
 
-    cout << "\nBye\n";
+    cout << "\n\nBye\n";
 
     return EXIT_SUCCESS;
 }
@@ -96,13 +96,33 @@ void convert()//string grammar)
         {
             
             cout << "d(q1, " << grammar[i][1].at(x) << ", " << grammar[i][0] << ") = {(q1, ";
-            for(int k = 1; k < grammar[i][1].size(); k++)
+            
+            if(grammar[i][1].size() == 1)
             {
-                cout << grammar[i][1].at(k);
+                cout << "lambda";
+            }else
+            {
+                for(int k = 1; k < grammar[i][1].size(); k++)
+                {
+                    cout << grammar[i][1].at(k);
+                }
             }
+            
+            /*for(int k = 1; k < grammar[i][1].size(); k++)
+            {
+                if(grammar[i][1].size() == 1)
+                {
+                    cout << "lambda";
+                }else
+                {
+                    cout << grammar[i][1].at(k);
+
+                }
+                
+            }*/
             // grammar[0] = s aBBBB
             // grammar [1] = a cD
-            cout << ")} " << endl;
+            cout << ")} ";
             x++;
         } 
         x = 0;
