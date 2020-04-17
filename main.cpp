@@ -56,14 +56,25 @@ int main()
         line.clear();
     }
 
-    // for(auto g : grammar)
-    // {
-    //     for(auto l : g)
-    //     cout << l << " ";
-    // }
+    cout << "\nGrammar:\n";
 
-    cout << "\nGrammar:\n" << input << endl;
-    
+    for(int i = 0; i < grammar.size(); i++) //rules = everything to the right of the arrow
+    {
+        for(int j = 1; j < grammar[i].size(); j++)
+        {
+            if(grammar[i].size() > 2)
+            {
+                if(j < 2) cout << grammar[i][0] << "->" << grammar[i][j];
+                if(j >= 2) cout << "|" << grammar[i][j];
+                    else if(j == (grammar[i].size() - 1)) cout << grammar[i][j];
+            } else cout << grammar[i][0] << "->" << grammar[i][j];
+        } 
+        
+        cout << endl;
+    }
+
+    cout << endl;
+
     convert();
 
     cout << "\n\nBye\n";
@@ -71,61 +82,43 @@ int main()
     return EXIT_SUCCESS;
 }
 
-void convert()//string grammar)
+void convert()
 {
-    //use islower() and isupper() functions
-    //PDA will have 3 states, q0 with transition to q1 with marking (lambda, z, Sz), q1 with loop to itself
-    //with bunch of markings based on the grammar, and qf - final state with transition q1 to qf
-    //with marking (lambda, z, lambda).
-
-    /*
-    (q1, a, a) = {q1, lambda)
-    (q1, b, b) = {q1, lambda)
-    (q1, lambda, S) = {q1, aAB)
-    (q1, lambda, B) = {q1, b)
-    (q1, lambda, A) = {q1, aAB)
-    */
-
-    int x = 0;
+    cout << "PDA CONVERSION:\n";
     cout << "d(q0, lambda, z) = { (q1, Sz) }" << endl;
 
     //loop one production line at a time
     for(int i = 0; i < grammar.size(); i++) //rules = everything to the right of the arrow
     {
-        for(int j = 0; j < grammar[i].size() - 1; j++)
+        cout << "d(q1, " << grammar[i][1].at(0) << ", " << grammar[i][0] << ") = ";//{(q1, ";
+
+        if(grammar[i].size() > 2)
         {
-            
-            cout << "d(q1, " << grammar[i][1].at(x) << ", " << grammar[i][0] << ") = {(q1, ";
-            
-            if(grammar[i][1].size() == 1)
+            cout << "{(q1, ";
+            for(int c = 1; c < grammar[i].size(); c++) // "-1" to not count terminal 
             {
-                cout << "lambda";
-            }else
+                for(int k = 1; k < grammar[i][c].size(); k++)
+                {
+                    cout << grammar[i][c].at(k);
+                }
+                
+                if(c == (grammar[i].size() - 1)) break;
+                
+                cout << "), (q1, ";
+            }
+        } else if(grammar[i][1].size() == 1)
             {
+                cout << "{(q1, lambda";
+            }else if(grammar[i][1].size() > 1)
+            {
+                cout << "{(q1, ";
                 for(int k = 1; k < grammar[i][1].size(); k++)
                 {
                     cout << grammar[i][1].at(k);
                 }
             }
             
-            /*for(int k = 1; k < grammar[i][1].size(); k++)
-            {
-                if(grammar[i][1].size() == 1)
-                {
-                    cout << "lambda";
-                }else
-                {
-                    cout << grammar[i][1].at(k);
-
-                }
-                
-            }*/
-            // grammar[0] = s aBBBB
-            // grammar [1] = a cD
-            cout << ")} ";
-            x++;
-        } 
-        x = 0;
+        cout << ")} ";
         cout << endl;
     }
 
