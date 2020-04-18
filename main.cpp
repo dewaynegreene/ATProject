@@ -95,20 +95,59 @@ void convert()
         if(grammar[i].size() > 2)
         {
             cout << "{(q1, ";
+
             for(int c = 1; c < grammar[i].size(); c++) // "-1" to not count terminal 
             {
-                for(int k = 1; k < grammar[i][c].size(); k++)
+                if((c > 1) && (grammar[i][c].at(0) != grammar[i][c - 1].at(0)))
                 {
-                    cout << grammar[i][c].at(k);
-                }
+                    //if the input symbols are different
+                    cout << "lambda) }\n";
+                    cout << "d(q1, " << grammar[i][c].at(0) << ", " << grammar[i][0] << ") = ";
+                    
+                    cout << "{(q1, ";
+                    if(grammar[i][c].size() == 1)
+                    {
+                        cout << "lambda)}\n";
+                        continue;
+                    } else
+                        {
+                            for(int k = 1; k < grammar[i][c].size(); k++)
+                            {
+                                cout << grammar[i][c].at(k);
+                                cout << ")}\n";
+                            } 
+                        }
                 
+                    break;
+                } else if(grammar[i][c].size() == 2)
+                    {
+                        cout << "\nd(q1, " << grammar[i][1].at(0) << ", " << grammar[i][0] << ") = {(q1, lambda)}\n";
+                        break;
+                    } else
+                        {
+                            //at last element
+                            if(c == (grammar[i][c].size() - 1))
+                            {
+                                for(int k = 1; k < grammar[i][c].size(); k++)
+                                {
+                                    cout << grammar[i][c].at(k);
+                                }
+                                cout << ")}\n";
+                            } else
+                                {
+                                    for(int k = 1; k < grammar[i][c].size(); k++)
+                                    {
+                                        cout << grammar[i][c].at(k);
+                                    }
+                                    cout << "), (q1, ";
+                                }
+                        }
+
                 if(c == (grammar[i].size() - 1)) break;
-                
-                cout << "), (q1, ";
             }
         } else if(grammar[i][1].size() == 1)
             {
-                cout << "{(q1, lambda";
+                cout << "{(q1, lambda)}\n";
             }else if(grammar[i][1].size() > 1)
             {
                 cout << "{(q1, ";
@@ -116,10 +155,8 @@ void convert()
                 {
                     cout << grammar[i][1].at(k);
                 }
+                cout << ")}\n";
             }
-            
-        cout << ")} ";
-        cout << endl;
     }
 
     cout << "d(qf, lambda, z) = { (qz, lambda) }";
